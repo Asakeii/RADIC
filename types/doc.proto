@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package types;
+
+message Keyword {
+  string Field = 1;
+  string Word = 2;
+}
+
+message Document {
+  string Id = 1;  // 业务使用的唯一Id, 索引上此Id不会重复
+  uint64 IntId = 2; // 倒排索引上使用的是文档Id
+  uint64 BitsFeature = 3; // 每个Bit都表示文档的离散属性
+  repeated Keyword Keywords = 4;  // repeated(切片) 倒排索引的key
+  bytes Bytes = 5;  // bytes(切片) 业务实体序列化之后的结果
+}

@@ -122,7 +122,7 @@ func (m *ConcurrentHashMap) Set(key string, value any) {
 	m.mps[index][key] = value
 }
 
-// Get concurrentHaspMap的读操作
+// Get concurrentHaspMap的读操作 返回key对应的跳表
 func (m *ConcurrentHashMap) Get(key string) (any, bool) {
 	index := m.getSegIndex(key, m.seed)
 
