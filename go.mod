@@ -1,6 +1,8 @@
 module RADIC
 
-go 1.24
+go 1.24.0
+
+toolchain go1.24.9
 
 require (
 	github.com/dgraph-io/badger/v4 v4.8.0
@@ -8,7 +10,9 @@ require (
 	github.com/huandu/skiplist v1.2.1
 	github.com/leemcloughlin/gofarmhash v0.0.0-20160919192320-0a055c5b87a8
 	go.etcd.io/bbolt v1.4.3
+	go.etcd.io/etcd/api/v3 v3.6.6
 	go.etcd.io/etcd/client/v3 v3.6.6
+	golang.org/x/time v0.14.0
 )
 
 require (
@@ -23,7 +27,6 @@ require (
 	github.com/google/flatbuffers v25.2.10+incompatible // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.26.3 // indirect
 	github.com/klauspost/compress v1.18.0 // indirect
-	go.etcd.io/etcd/api/v3 v3.6.6 // indirect
 	go.etcd.io/etcd/client/pkg/v3 v3.6.6 // indirect
 	go.opentelemetry.io/auto/sdk v1.1.0 // indirect
 	go.opentelemetry.io/otel v1.37.0 // indirect

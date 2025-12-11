@@ -1,0 +1,12 @@
+syntax="proto3";
+
+package types;
+option go_package = "RADIC/types"; // ← 必须和 package 一致的路径
+
+
+message TermQuery {
+    repeated TermQuery Must  = 1;
+    repeated TermQuery Should  = 2;
+    string Keyword = 3;
+}
+

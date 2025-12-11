@@ -99,7 +99,7 @@ func (hub *ServiceHub) UnRegist(service string, endpoint string) error {
 	}
 }
 
-// GetServiceEndpoints 服务发现  client每次进行RPC调用之前都查询etcd，获取service集合，然后采用负载均衡算法选择一台service
+// GetServiceEndpoints 服务发现  client每次进行RPC调用之前都查询etcd，获取service集合，为负载均衡算法做准备
 func (hub *ServiceHub) GetServiceEndpoints(service string) []string {
 	ctx := context.Background()
 	prefix := strings.TrimRight(SERVICE_ROOT_PATH, "/") + "/" + service + "/"
@@ -118,4 +118,9 @@ func (hub *ServiceHub) GetServiceEndpoints(service string) []string {
 		return endpoints
 	}
 
+}
+
+// GetServiceEndPoint 服务发现，策略模式 采用负载均衡算法选择一台service
+func (hub *ServiceHub) GetServiceEndPoint(service string) string {
+	return hub.loadBalancer.Take(hub.GetServiceEndpoints(service))
 }

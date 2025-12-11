@@ -3,11 +3,11 @@ package types
 // AST（抽象语法树）实现搜索表达式
 // builder模式
 
-type TermQuery struct {
-	Must    []*TermQuery
-	Should  []*TermQuery
-	Keyword string
-}
+//type TermQuery struct {
+//	Must    []*TermQuery
+//	Should  []*TermQuery
+//	Keyword string
+//}
 
 func (q *TermQuery) Empty() bool {
 	return q.Keyword == "" && len(q.Must) == 0 && len(q.Should) == 0
