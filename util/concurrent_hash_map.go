@@ -14,25 +14,29 @@ import (
 
 // ConcurrentHashMap 支持并发独写的map
 type ConcurrentHashMap struct {
-	mps   []map[string]any
-	seg   int
-	locks []sync.RWMutex
-	seed  uint32
+	mps   []map[string]any // map切片，每个map都是一个分段的map
+	seg   int              // 要分的段数
+	locks []sync.RWMutex   // 读写锁，为每一段都配锁，降低锁竞争
+	seed  uint32           // 哈希种子
 }
+
+// MapEntry kv存储结构体
 type MapEntry struct {
 	key   string
 	value any
 }
 
+// MapIterator 提供MapEntry的Next迭代接口		迭代器模式
 type MapIterator interface {
 	Next() *MapEntry
 }
 
+// ConcurrentHashMapIterator
 type ConcurrentHashMapIterator struct {
-	cm       *ConcurrentHashMap
-	keys     [][]string // 将map里的key都存下来，固定顺序
-	rowIndex int
-	colIndex int
+	cm       *ConcurrentHashMap // 底层用于存储的[]map的指针
+	keys     [][]string         // 将map里的key都存下来，固定顺序
+	rowIndex int                // 行索引
+	colIndex int                // 列索引
 }
 
 // CreateIterator 迭代器的初始化
